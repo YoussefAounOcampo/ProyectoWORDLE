@@ -6,3 +6,14 @@ Para ver mi página web actual es: https://yuss1.odoo.com/@/
 
 #Profe:
 Un pequeño detalle, aquí debes describir el proyecto, las tecnonogías que usarás el objetivo.
+En este proyecto utilizo WPF para la interfaz y la clase en la que realizo la lógica del programa
+En esta sesión he cambiado visualmente los elementos de la interfaz (redondeandolos y cambiando de label a TextBox) y dándoles color.
+También he realizado la lógica de busqueda de las letras de las palabras y el cambio de color según se encuentran. 
+>>>VERDE letra correcta posicion correcta
+>>>Amarillo la letra se encuentra en la palabra pero no en la posicion introducida
+>>>Gris La letra no se encuentra en la palabra secreta.
+
+También he incluido en el proyecto una carpeta nueva en la que se encuentra el fichero desde el cual se cogen las palabras secretas (Con un SteamReader) para el juego 
+cargandose en un arrayList y seleccionandose de forma aleatoria con la clase Random.
+
+Faltaría sacar un dialogo en caso de Win or Loose y pulir un par de cositas.
