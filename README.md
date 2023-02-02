@@ -1,6 +1,6 @@
 Este es el primer commit que realizo a el proyecto de Interfaces.
 En este primer posteo, subo lo que sería la interfaz de mi aplicación WORDLE.
-Obviamente faltan muchos retoques como cambiar las X por campos vacíos, una opción para cambiar el tamaño de las palabras etc...
+Obviamente faltan muchos retoques como cambiar las X por campos vacíos...
 
 Para ver mi página web actual es: https://yuss1.odoo.com/@/
 
@@ -17,3 +17,5 @@ También he incluido en el proyecto una carpeta nueva en la que se encuentra el 
 cargandose en un arrayList y seleccionandose de forma aleatoria con la clase Random.
 
 Faltaría sacar un dialogo en caso de Win or Loose y pulir un par de cositas.
+
+He creado una ventana que se muestra al acertar la palabra. Falta ponerlo en todos los metodos y pulirlo.
