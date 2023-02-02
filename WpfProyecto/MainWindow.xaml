@@ -1,10 +1,10 @@
-﻿<Window
+﻿<Window x:Class="WpfProyecto.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfProyecto"
-        xmlns:System="clr-namespace:System;assembly=mscorlib" x:Class="WpfProyecto.MainWindow"
+        xmlns:System="clr-namespace:System;assembly=mscorlib" 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
     >
@@ -20,16 +20,21 @@
             </LinearGradientBrush>
 
         </Grid.Background>
-        <Label Content="Introduce tu intento:" HorizontalAlignment="Left" Margin="104,312,0,0" VerticalAlignment="Top" Width="208" FontSize="22" RenderTransformOrigin="0.465,0.506"/>
+        <Label x:Name="debug" Content="Introduce tu intento:" HorizontalAlignment="Left" Margin="104,312,0,0" VerticalAlignment="Top" Width="208" FontSize="22" RenderTransformOrigin="0.465,0.506"/>
         <Label Content="WORDLE" HorizontalContentAlignment="Center" Background="Black" TextBlock.Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="792" FontWeight="Bold" FontSize="50"/>
-        <Label Content="x x x x x  " HorizontalAlignment="Left" Margin="348,70,0,0" VerticalAlignment="Top" Width="135" FontSize="22"/>
-        <Label Content="x x x x x  " HorizontalAlignment="Left" Margin="348,109.119,0,0" VerticalAlignment="Top" Width="134.993" FontSize="22"/>
-        <Label Content="x x x x x  " HorizontalAlignment="Left" Margin="348,186,0,0" VerticalAlignment="Top" Width="135" FontSize="22"/>
-        <Label Content="x x x x x  " HorizontalAlignment="Left" Margin="348,148,0,0" VerticalAlignment="Top" Width="135" FontSize="22"/>
-        <Label Content="x x x x x  " HorizontalAlignment="Left" Margin="348,230,0,0" VerticalAlignment="Top" Width="135" FontSize="22"/>
-        <Label Content="x x x x x  " HorizontalAlignment="Left" Margin="348,274,0,0" VerticalAlignment="Top" Width="135" FontSize="22"/>
-        <TextBox HorizontalAlignment="Left" Height="38" Margin="334,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" AutomationProperties.HelpText="Introduce tu respuesta"/>
-        <Button Margin="509,318,127,55" TextBlock.Foreground="White" HorizontalContentAlignment="Center" >
+        <TextBox x:Name="cajaTexto" HorizontalAlignment="Left" Height="38" Margin="334,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" AutomationProperties.HelpText="Introduce tu respuesta" TextChanged="cajaTexto_TextChanged">
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <Button x:Name="boton" Click="SendGuess" Margin="509,318,127,55" TextBlock.Foreground="White" HorizontalContentAlignment="Center" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
             <Button.FontSize>
                 <System:Double>21</System:Double>
             </Button.FontSize>
@@ -42,7 +47,335 @@
                         </GradientStopCollection>
                     </LinearGradientBrush.GradientStops>
                 </LinearGradientBrush>
+                
             </Button.Background> Prueba
         </Button>
+        <TextBox x:Name="fila1_letra1" HorizontalAlignment="Left" Margin="316,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  Width="28" Height="27" IsEnabled="False">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila1_letra2" HorizontalAlignment="Left" Margin="349,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila1_letra3" HorizontalAlignment="Left" Margin="382,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila1_letra4" HorizontalAlignment="Left" Margin="415,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila1_letra5" HorizontalAlignment="Left" Margin="448,91,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila2_letra1" HorizontalAlignment="Left" Margin="316,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila2_letra2" HorizontalAlignment="Left" Margin="349,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila2_letra3" HorizontalAlignment="Left" Margin="382,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila2_letra4" HorizontalAlignment="Left" Margin="415,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila2_letra5" HorizontalAlignment="Left" Margin="448,134,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila3_letra1" HorizontalAlignment="Left" Margin="316,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila3_letra2" HorizontalAlignment="Left" Margin="349,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila3_letra3" HorizontalAlignment="Left" Margin="382,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila3_letra4" HorizontalAlignment="Left" Margin="415,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila3_letra5" HorizontalAlignment="Left" Margin="448,175,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="28" Height="27" IsEnabled="False">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila4_letra1" HorizontalAlignment="Left" Margin="316,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila4_letra2" HorizontalAlignment="Left" Margin="349,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila4_letra3" HorizontalAlignment="Left" Margin="382,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila4_letra4" HorizontalAlignment="Left" Margin="415,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila4_letra5" HorizontalAlignment="Left" Margin="448,217,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila5_letra1" HorizontalAlignment="Left" Margin="316,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila5_letra2" HorizontalAlignment="Left" Margin="349,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila5_letra3" HorizontalAlignment="Left" Margin="382,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
+        <TextBox x:Name="fila5_letra4" HorizontalAlignment="Left" Margin="415,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top" IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+
+        </TextBox>
+        
+        <TextBox x:Name="fila5_letra5" HorizontalAlignment="Left" Margin="448,258,0,0" TextWrapping="Wrap" VerticalAlignment="Top"  IsEnabled="False" Width="28" Height="27">
+            <TextBox.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </TextBox.Background>
+            <TextBox.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="3"/>
+                </Style>
+            </TextBox.Resources>
+        </TextBox>
     </Grid>
 </Window>
