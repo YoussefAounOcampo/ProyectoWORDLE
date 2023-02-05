@@ -19,3 +19,11 @@ cargandose en un arrayList y seleccionandose de forma aleatoria con la clase Ran
 Faltaría sacar un dialogo en caso de Win or Loose y pulir un par de cositas.
 
 He creado una ventana que se muestra al acertar la palabra. Falta ponerlo en todos los metodos y pulirlo.
+
+Hoy he retocado todo el codigo, simplificandolo, de casi 800 líneas a 200. Puedes comprobarlo en versiones anteriores.
+He hecho dos ventanas más, también he hecho que al maximizar se refactoricen, falta cambiar la del juego en sí pero eso ya lo haré otro día.
+También he cambiado la funcionalidad de cuando ganas o pierdes, antes solo te dejaba cerrar el juego, ahora puedes cerrarlo o jugar otra partida.
+
+Terminado.
+Realizado las ventanas restantes.
+Registro, cambio funcionalidad letras repetidas, botones de vuelta.
