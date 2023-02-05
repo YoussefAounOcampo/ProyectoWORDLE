@@ -22,9 +22,11 @@
             <Button Background="#32a852" Content="VOLVER" FontWeight="Bold" FontSize="18" Foreground="White" Height="45"  Width="200"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" Click="Button_Click_2">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
+                        
                         <Setter Property="CornerRadius" Value="10"/>
                     </Style>
                 </Button.Resources>
+                
             </Button>
         </Grid>
       

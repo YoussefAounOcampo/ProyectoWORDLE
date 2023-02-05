@@ -1,0 +1,48 @@
+﻿<Window x:Class="WpfProyecto.Registro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WpfProyecto"
+        mc:Ignorable="d"
+        Title="Registro" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen">
+
+    <Grid>
+        <Image Source="Images/wordleinicio.png" Stretch="UniformToFill" IsHitTestVisible="False"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="145*"/>
+                <RowDefinition Height="239*"/>
+                <RowDefinition Height="50*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="200*"/>
+                <ColumnDefinition Width="397*"/>
+                <ColumnDefinition Width="200*"/>
+            </Grid.ColumnDefinitions>
+            <Rectangle Grid.Column="1" Grid.Row="1" Fill="#FF191919"></Rectangle>
+            <TextBox x:Name="Caja" HorizontalAlignment="Stretch" TextBlock.Foreground="White" TextBlock.TextAlignment="Center" TextBlock.FontSize="14" TextBlock.FontWeight="Bold" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Grid.Column="1" Grid.Row="1">
+                <TextBox.Template>
+                    <ControlTemplate>
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </ControlTemplate>
+                </TextBox.Template>
+            </TextBox>
+            <Button x:Name="Volver" Background="#32a852" Content="VOLVER" FontWeight="Bold" FontSize="18" Foreground="White" Height="45"  Width="200"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="2" Click="Button_Click_2">
+                <Button.Resources>
+                    <Style TargetType="{x:Type Border}">
+
+                        <Setter Property="CornerRadius" Value="10"/>
+                    </Style>
+                </Button.Resources>
+
+            </Button>
+
+        </Grid>
+       
+
+
+    </Grid>
+
+</Window>

@@ -36,7 +36,7 @@
                     </Style>
                 </Button.Resources>
             </Button>
-            <Button Background="#32a852" Content="REGISTROS ANTERIORES"  FontWeight="Bold" FontSize="18"  Foreground="White" Height="45"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1">
+            <Button Background="#32a852" Content="REGISTROS ANTERIORES"  FontWeight="Bold" FontSize="18"  Foreground="White" Height="45"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" Click="Button_Click_3">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
                         <Setter Property="CornerRadius" Value="10"/>

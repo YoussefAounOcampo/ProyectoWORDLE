@@ -21,7 +21,7 @@ namespace WpfProyecto
     {
         public Inicio()
         {
-           
+
             InitializeComponent();
         }
 
@@ -32,19 +32,24 @@ namespace WpfProyecto
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
-          
-            MainWindow m1= new MainWindow();
+
+            MainWindow m1 = new MainWindow();
             this.Close();
             m1.Show();
         }
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            Instrucciones instrucciones= new Instrucciones();
+            Instrucciones instrucciones = new Instrucciones();
             this.Close();
             instrucciones.Show();
         }
 
-       
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Registro register = new Registro();
+            this.Close();
+            register.Show();
+        }
     }
 }
