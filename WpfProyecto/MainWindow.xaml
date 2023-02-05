@@ -7,20 +7,17 @@
         xmlns:System="clr-namespace:System;assembly=mscorlib" 
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800"
+        WindowStartupLocation="CenterScreen"
     >
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush>
-                <LinearGradientBrush.GradientStops>
-                    <GradientStopCollection>
-                        <GradientStop Offset="0" Color="White"/>
-                        <GradientStop Offset="1" Color="LightSlateGray"/>
-                    </GradientStopCollection>
-                </LinearGradientBrush.GradientStops>
+            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                <GradientStop Color="Black"/>
+                <GradientStop Color="Black" Offset="1"/>
             </LinearGradientBrush>
-
         </Grid.Background>
-        <Label x:Name="debug" Content="Introduce tu intento:" HorizontalAlignment="Left" Margin="104,312,0,0" VerticalAlignment="Top" Width="208" FontSize="22" RenderTransformOrigin="0.465,0.506"/>
+
+        <Label x:Name="debug" Content="Introduce tu intento:" HorizontalAlignment="Left" Margin="104,312,0,0" VerticalAlignment="Top" Width="208" FontSize="22" RenderTransformOrigin="0.465,0.506" Foreground="White"/>
         <Label Content="WORDLE" HorizontalContentAlignment="Center" Background="Black" TextBlock.Foreground="White" HorizontalAlignment="Left" VerticalAlignment="Top" Width="792" FontWeight="Bold" FontSize="50"/>
         <TextBox x:Name="cajaTexto" HorizontalAlignment="Left" Height="38" Margin="334,318,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" AutomationProperties.HelpText="Introduce tu respuesta" TextChanged="cajaTexto_TextChanged">
             <TextBox.Resources>

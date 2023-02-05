@@ -23,20 +23,30 @@ namespace WpfProyecto
     {
         private String SecretWord = "";
         private static int contador; //Contador que nos servirá para saber en que intento estamos.
-        private bool Win;
+        private List<List<TextBox>> Lista = new List<List<TextBox>>();
+        private List<String> wordList = new List<String>();
 
-
-        
         public MainWindow()
 
         {
-            Win = false;
+           
             contador = -1;
             InitializeComponent();
             boton.Content = "Prueba";
 
+            List<TextBox> primera = new List<TextBox> { fila1_letra1, fila1_letra2, fila1_letra3, fila1_letra4, fila1_letra5 };
+            List<TextBox> segunda = new List<TextBox> { fila2_letra1, fila2_letra2, fila2_letra3, fila2_letra4, fila2_letra5 };
+            List<TextBox> tercera = new List<TextBox> { fila3_letra1, fila3_letra2, fila3_letra3, fila3_letra4, fila3_letra5 };
+            List<TextBox> cuarta = new List<TextBox> { fila4_letra1, fila4_letra2, fila4_letra3, fila4_letra4, fila4_letra5 };
+            List<TextBox> quinta = new List<TextBox> { fila5_letra1, fila5_letra2, fila5_letra3, fila5_letra4, fila5_letra5 };
 
-            List<String> wordList = new List<String>();
+            Lista.Add(primera);
+            Lista.Add(segunda);
+            Lista.Add(tercera);
+            Lista.Add(cuarta);
+            Lista.Add(quinta);
+
+           
             using (StreamReader reader = new StreamReader(@"..\..\..\WpfProyecto\Words\palabras.txt"))
             {
                 String text = reader.ReadToEnd();
@@ -52,596 +62,155 @@ namespace WpfProyecto
             SecretWord = wordList[numeroAleatorio];
             char[] SecretWordArray = SecretWord.ToCharArray();
 
-             debug.Content = SecretWord;
+            debug.Content = SecretWord;
 
 
 
         }
+
+
         private void SendGuess(object sender, RoutedEventArgs e)
         {
-            contador++;
-            if (cajaTexto.Text.Length == 5) //Comprobamos que tenga el mismo lenght que la palabra a adivinar.
+
+            if (contador == 3)
             {
-                cajaTexto.Text = cajaTexto.Text.ToUpper();
-                switch (contador)
+               
+                ShowLossMessage();
+                
+               
+               
+            }
+            else
+            {
+                contador++;
+
+                if (cajaTexto.Text.Length == 5) //Comprobamos que tenga el mismo lenght que la palabra a adivinar.
                 {
-                    case 0:
-                        CheckFirstRow();
-                        break;
+                    cajaTexto.Text = cajaTexto.Text.ToUpper();
 
-                    case 1:
-                        CheckRow2();
-                        break;
 
-                    case 2:
-                        CheckRow3();
-                        break;
+                    CheckRow(contador);
 
-                    case 3:
-                        CheckRow4();
-                        break;
-
-                    case 4:
-                        CheckRow5();
-                        break;
-
-                    case 5:
-                        //TODO FIN DE LA PARTIDA
-                        break;
                 }
-
-
-
+                else
+                {
+                    contador--;
+                }
             }
 
-        }
-        private void CheckRow5()
-        {
-
-            char[] Guess = cajaTexto.Text.ToCharArray();
-            cajaTexto.Text = "";
-
-            //TODO: Conprobar letras
-
-            //COMPROBACION PRIMERA LETRA
-            if (Guess[0].Equals(SecretWord[0]))
-            {
-                fila5_letra1.Background = new SolidColorBrush(Colors.Green);
-                fila5_letra1.Text = Guess[0] + "";
-            }
-            else if (Guess[0].Equals(SecretWord[1]) || Guess[0].Equals(SecretWord[2]) || Guess[0].Equals(SecretWord[3]) || Guess[0].Equals(SecretWord[4]))
-            {
-                fila5_letra1.Background = new SolidColorBrush(Colors.Yellow);
-                fila5_letra1.Text = Guess[0] + "";
-
-            }
-            else
-            {
-                fila5_letra1.Background = new SolidColorBrush(Colors.Gray);
-                fila5_letra1.Text = Guess[0] + "";
-            }
-
-
-            //COMPROBACION SEGUNDA LETRA
-
-            if (Guess[1].Equals(SecretWord[1]))
-            {
-                fila5_letra2.Background = new SolidColorBrush(Colors.Green);
-                fila5_letra2.Text = Guess[1] + "";
-            }
-            else if (Guess[1].Equals(SecretWord[0]) || Guess[1].Equals(SecretWord[2]) || Guess[1].Equals(SecretWord[3]) || Guess[1].Equals(SecretWord[4]))
-            {
-                fila5_letra2.Background = new SolidColorBrush(Colors.Yellow);
-                fila5_letra2.Text = Guess[1] + "";
-
-            }
-            else
-            {
-                fila5_letra2.Background = new SolidColorBrush(Colors.Gray);
-                fila5_letra2.Text = Guess[1] + "";
-            }
-
-
-            //COMPROBACION TERCERA LETRA
-            if (Guess[2].Equals(SecretWord[2]))
-            {
-                fila5_letra3.Background = new SolidColorBrush(Colors.Green);
-                fila5_letra3.Text = Guess[2] + "";
-            }
-            else if (Guess[2].Equals(SecretWord[0]) || Guess[2].Equals(SecretWord[1]) || Guess[2].Equals(SecretWord[3]) || Guess[2].Equals(SecretWord[4]))
-            {
-                fila5_letra3.Background = new SolidColorBrush(Colors.Yellow);
-                fila5_letra3.Text = Guess[2] + "";
-
-            }
-            else
-            {
-                fila5_letra3.Background = new SolidColorBrush(Colors.Gray);
-                fila5_letra3.Text = Guess[2] + "";
-            }
-
-
-            //COMPROBACION CUARTA LETRA
-            if (Guess[3].Equals(SecretWord[3]))
-            {
-                fila5_letra4.Background = new SolidColorBrush(Colors.Green);
-                fila5_letra4.Text = Guess[3] + "";
-            }
-            else if (Guess[3].Equals(SecretWord[0]) || Guess[3].Equals(SecretWord[1]) || Guess[3].Equals(SecretWord[2]) || Guess[3].Equals(SecretWord[4]))
-            {
-                fila5_letra4.Background = new SolidColorBrush(Colors.Yellow);
-                fila5_letra4.Text = Guess[3] + "";
-
-            }
-            else
-            {
-                fila5_letra4.Background = new SolidColorBrush(Colors.Gray);
-                fila5_letra4.Text = Guess[3] + "";
-            }
-
-            //COMPROBACION QUINTA LETRA
-
-            if (Guess[4].Equals(SecretWord[4]))
-            {
-                fila5_letra5.Background = new SolidColorBrush(Colors.Green);
-                fila5_letra5.Text = Guess[4] + "";
-            }
-            else if (Guess[4].Equals(SecretWord[0]) || Guess[4].Equals(SecretWord[1]) || Guess[4].Equals(SecretWord[2]) || Guess[4].Equals(SecretWord[3]))
-            {
-                fila5_letra5.Background = new SolidColorBrush(Colors.Yellow);
-                fila5_letra5.Text = Guess[4] + "";
-
-            }
-            else
-            {
-                fila5_letra5.Background = new SolidColorBrush(Colors.Gray);
-                fila5_letra5.Text = Guess[4] + "";
-            }
-
-        }
-
-        private void CheckRow4()
-        {
-
-            char[] Guess = cajaTexto.Text.ToCharArray();
-            cajaTexto.Text = "";
-
-
-            //TODO: Conprobar letras
-
-            //COMPROBACION PRIMERA LETRA
-            if (Guess[0].Equals(SecretWord[0]))
-            {
-                fila4_letra1.Background = new SolidColorBrush(Colors.Green);
-                fila4_letra1.Text = Guess[0] + "";
-            }
-            else if (Guess[0].Equals(SecretWord[1]) || Guess[0].Equals(SecretWord[2]) || Guess[0].Equals(SecretWord[3]) || Guess[0].Equals(SecretWord[4]))
-            {
-                fila4_letra1.Background = new SolidColorBrush(Colors.Yellow);
-                fila4_letra1.Text = Guess[0] + "";
-
-            }
-            else
-            {
-                fila4_letra1.Background = new SolidColorBrush(Colors.Gray);
-                fila4_letra1.Text = Guess[0] + "";
-            }
-
-
-            //COMPROBACION SEGUNDA LETRA
-
-            if (Guess[1].Equals(SecretWord[1]))
-            {
-                fila4_letra2.Background = new SolidColorBrush(Colors.Green);
-                fila4_letra2.Text = Guess[1] + "";
-            }
-            else if (Guess[1].Equals(SecretWord[0]) || Guess[1].Equals(SecretWord[2]) || Guess[1].Equals(SecretWord[3]) || Guess[1].Equals(SecretWord[4]))
-            {
-                fila4_letra2.Background = new SolidColorBrush(Colors.Yellow);
-                fila4_letra2.Text = Guess[1] + "";
-
-            }
-            else
-            {
-                fila4_letra2.Background = new SolidColorBrush(Colors.Gray);
-                fila4_letra2.Text = Guess[1] + "";
-            }
-
-
-            //COMPROBACION TERCERA LETRA
-            if (Guess[2].Equals(SecretWord[2]))
-            {
-                fila4_letra3.Background = new SolidColorBrush(Colors.Green);
-                fila4_letra3.Text = Guess[2] + "";
-            }
-            else if (Guess[2].Equals(SecretWord[0]) || Guess[2].Equals(SecretWord[1]) || Guess[2].Equals(SecretWord[3]) || Guess[2].Equals(SecretWord[4]))
-            {
-                fila4_letra3.Background = new SolidColorBrush(Colors.Yellow);
-                fila4_letra3.Text = Guess[2] + "";
-
-            }
-            else
-            {
-                fila4_letra3.Background = new SolidColorBrush(Colors.Gray);
-                fila4_letra3.Text = Guess[2] + "";
-            }
-
-
-            //COMPROBACION CUARTA LETRA
-            if (Guess[3].Equals(SecretWord[3]))
-            {
-                fila4_letra4.Background = new SolidColorBrush(Colors.Green);
-                fila4_letra4.Text = Guess[3] + "";
-            }
-            else if (Guess[3].Equals(SecretWord[0]) || Guess[3].Equals(SecretWord[1]) || Guess[3].Equals(SecretWord[2]) || Guess[3].Equals(SecretWord[4]))
-            {
-                fila4_letra4.Background = new SolidColorBrush(Colors.Yellow);
-                fila4_letra4.Text = Guess[3] + "";
-
-            }
-            else
-            {
-                fila4_letra4.Background = new SolidColorBrush(Colors.Gray);
-                fila4_letra4.Text = Guess[3] + "";
-            }
-
-            //COMPROBACION QUINTA LETRA
-
-            if (Guess[4].Equals(SecretWord[4]))
-            {
-                fila4_letra5.Background = new SolidColorBrush(Colors.Green);
-                fila4_letra5.Text = Guess[4] + "";
-            }
-            else if (Guess[4].Equals(SecretWord[0]) || Guess[4].Equals(SecretWord[1]) || Guess[4].Equals(SecretWord[2]) || Guess[4].Equals(SecretWord[3]))
-            {
-                fila4_letra5.Background = new SolidColorBrush(Colors.Yellow);
-                fila4_letra5.Text = Guess[4] + "";
-
-            }
-            else
-            {
-                fila4_letra5.Background = new SolidColorBrush(Colors.Gray);
-                fila4_letra5.Text = Guess[4] + "";
-            }
-
-        }
-
-        private void CheckRow3()
-        {
-
-            char[] Guess = cajaTexto.Text.ToCharArray();
-            cajaTexto.Text = "";
-
-
-            //TODO: Conprobar letras
-
-            //COMPROBACION PRIMERA LETRA
-            if (Guess[0].Equals(SecretWord[0]))
-            {
-                fila3_letra1.Background = new SolidColorBrush(Colors.Green);
-                fila3_letra1.Text = Guess[0] + "";
-            }
-            else if (Guess[0].Equals(SecretWord[1]) || Guess[0].Equals(SecretWord[2]) || Guess[0].Equals(SecretWord[3]) || Guess[0].Equals(SecretWord[4]))
-            {
-                fila3_letra1.Background = new SolidColorBrush(Colors.Yellow);
-                fila3_letra1.Text = Guess[0] + "";
-
-            }
-            else
-            {
-                fila3_letra1.Background = new SolidColorBrush(Colors.Gray);
-                fila3_letra1.Text = Guess[0] + "";
-            }
-
-
-            //COMPROBACION SEGUNDA LETRA
-
-            if (Guess[1].Equals(SecretWord[1]))
-            {
-                fila3_letra2.Background = new SolidColorBrush(Colors.Green);
-                fila3_letra2.Text = Guess[1] + "";
-            }
-            else if (Guess[1].Equals(SecretWord[0]) || Guess[1].Equals(SecretWord[2]) || Guess[1].Equals(SecretWord[3]) || Guess[1].Equals(SecretWord[4]))
-            {
-                fila3_letra2.Background = new SolidColorBrush(Colors.Yellow);
-                fila3_letra2.Text = Guess[1] + "";
-
-            }
-            else
-            {
-                fila3_letra2.Background = new SolidColorBrush(Colors.Gray);
-                fila3_letra2.Text = Guess[1] + "";
-            }
-
-
-            //COMPROBACION TERCERA LETRA
-            if (Guess[2].Equals(SecretWord[2]))
-            {
-                fila3_letra3.Background = new SolidColorBrush(Colors.Green);
-                fila3_letra3.Text = Guess[2] + "";
-            }
-            else if (Guess[2].Equals(SecretWord[0]) || Guess[2].Equals(SecretWord[1]) || Guess[2].Equals(SecretWord[3]) || Guess[2].Equals(SecretWord[4]))
-            {
-                fila3_letra3.Background = new SolidColorBrush(Colors.Yellow);
-                fila3_letra3.Text = Guess[2] + "";
-
-            }
-            else
-            {
-                fila3_letra3.Background = new SolidColorBrush(Colors.Gray);
-                fila3_letra3.Text = Guess[2] + "";
-            }
-
-
-            //COMPROBACION CUARTA LETRA
-            if (Guess[3].Equals(SecretWord[3]))
-            {
-                fila3_letra4.Background = new SolidColorBrush(Colors.Green);
-                fila3_letra4.Text = Guess[3] + "";
-            }
-            else if (Guess[3].Equals(SecretWord[0]) || Guess[3].Equals(SecretWord[1]) || Guess[3].Equals(SecretWord[2]) || Guess[3].Equals(SecretWord[4]))
-            {
-                fila3_letra4.Background = new SolidColorBrush(Colors.Yellow);
-                fila3_letra4.Text = Guess[3] + "";
-
-            }
-            else
-            {
-                fila3_letra4.Background = new SolidColorBrush(Colors.Gray);
-                fila3_letra4.Text = Guess[3] + "";
-            }
-
-            //COMPROBACION QUINTA LETRA
-
-            if (Guess[4].Equals(SecretWord[4]))
-            {
-                fila3_letra5.Background = new SolidColorBrush(Colors.Green);
-                fila3_letra5.Text = Guess[4] + "";
-            }
-            else if (Guess[4].Equals(SecretWord[0]) || Guess[4].Equals(SecretWord[1]) || Guess[4].Equals(SecretWord[2]) || Guess[4].Equals(SecretWord[3]))
-            {
-                fila3_letra5.Background = new SolidColorBrush(Colors.Yellow);
-                fila3_letra5.Text = Guess[4] + "";
-
-            }
-            else
-            {
-                fila3_letra5.Background = new SolidColorBrush(Colors.Gray);
-                fila3_letra5.Text = Guess[4] + "";
-            }
-
-        }
-
-        private void CheckRow2()
-        {
-
-            char[] Guess = cajaTexto.Text.ToCharArray();
-            cajaTexto.Text = "";
-
-
-            //TODO: Conprobar letras
-
-            //COMPROBACION PRIMERA LETRA
-            if (Guess[0].Equals(SecretWord[0]))
-            {
-                fila2_letra1.Background = new SolidColorBrush(Colors.Green);
-                fila2_letra1.Text = Guess[0] + "";
-            }
-            else if (Guess[0].Equals(SecretWord[1]) || Guess[0].Equals(SecretWord[2]) || Guess[0].Equals(SecretWord[3]) || Guess[0].Equals(SecretWord[4]))
-            {
-                fila2_letra1.Background = new SolidColorBrush(Colors.Yellow);
-                fila2_letra1.Text = Guess[0] + "";
-
-            }
-            else
-            {
-                fila2_letra1.Background = new SolidColorBrush(Colors.Gray);
-                fila2_letra1.Text = Guess[0] + "";
-            }
-
-
-            //COMPROBACION SEGUNDA LETRA
-
-            if (Guess[1].Equals(SecretWord[1]))
-            {
-                fila2_letra2.Background = new SolidColorBrush(Colors.Green);
-                fila2_letra2.Text = Guess[1] + "";
-            }
-            else if (Guess[1].Equals(SecretWord[0]) || Guess[1].Equals(SecretWord[2]) || Guess[1].Equals(SecretWord[3]) || Guess[1].Equals(SecretWord[4]))
-            {
-                fila2_letra2.Background = new SolidColorBrush(Colors.Yellow);
-                fila2_letra2.Text = Guess[1] + "";
-
-            }
-            else
-            {
-                fila2_letra2.Background = new SolidColorBrush(Colors.Gray);
-                fila2_letra2.Text = Guess[1] + "";
-            }
-
-
-            //COMPROBACION TERCERA LETRA
-            if (Guess[2].Equals(SecretWord[2]))
-            {
-                fila2_letra3.Background = new SolidColorBrush(Colors.Green);
-                fila2_letra3.Text = Guess[2] + "";
-            }
-            else if (Guess[2].Equals(SecretWord[0]) || Guess[2].Equals(SecretWord[1]) || Guess[2].Equals(SecretWord[3]) || Guess[2].Equals(SecretWord[4]))
-            {
-                fila2_letra3.Background = new SolidColorBrush(Colors.Yellow);
-                fila2_letra3.Text = Guess[2] + "";
-
-            }
-            else
-            {
-                fila2_letra3.Background = new SolidColorBrush(Colors.Gray);
-                fila2_letra3.Text = Guess[2] + "";
-            }
-
-
-            //COMPROBACION CUARTA LETRA
-            if (Guess[3].Equals(SecretWord[3]))
-            {
-                fila2_letra4.Background = new SolidColorBrush(Colors.Green);
-                fila2_letra4.Text = Guess[3] + "";
-            }
-            else if (Guess[3].Equals(SecretWord[0]) || Guess[3].Equals(SecretWord[1]) || Guess[3].Equals(SecretWord[2]) || Guess[3].Equals(SecretWord[4]))
-            {
-                fila2_letra4.Background = new SolidColorBrush(Colors.Yellow);
-                fila2_letra4.Text = Guess[3] + "";
-
-            }
-            else
-            {
-                fila2_letra4.Background = new SolidColorBrush(Colors.Gray);
-                fila2_letra4.Text = Guess[3] + "";
-            }
-
-            //COMPROBACION QUINTA LETRA
-
-            if (Guess[4].Equals(SecretWord[4]))
-            {
-                fila2_letra5.Background = new SolidColorBrush(Colors.Green);
-                fila2_letra5.Text = Guess[4] + "";
-            }
-            else if (Guess[4].Equals(SecretWord[0]) || Guess[4].Equals(SecretWord[1]) || Guess[4].Equals(SecretWord[2]) || Guess[4].Equals(SecretWord[3]))
-            {
-                fila2_letra5.Background = new SolidColorBrush(Colors.Yellow);
-                fila2_letra5.Text = Guess[4] + "";
-
-            }
-            else
-            {
-                fila2_letra5.Background = new SolidColorBrush(Colors.Gray);
-                fila2_letra5.Text = Guess[4] + "";
-            }
 
 
 
         }
 
-        private void CheckFirstRow()
+        private void CheckRow(int NumRow)
         {
-
+            List<TextBox> lista = Lista[NumRow];
             char[] Guess = cajaTexto.Text.ToCharArray();
             String intento = cajaTexto.Text.ToString();
             cajaTexto.Text = "";
+
+            for (int i = 0; i < 5; i++)
+            {
+                bool isWin = false;
+                for (int j = 0; j < 5; j++)
+                {
+                    if (!Guess[j].Equals(SecretWord[j]))
+                    {
+                        isWin = true;
+                    }
+                }
+
+                if (!isWin)
+                {
+                    for (int x = 0; x < 5; x++)
+                    {
+                        lista[x].Background = new SolidColorBrush(Colors.Green);
+                        lista[x].Text = Guess[x] + "";
+                    }
+                    ShowWinMessage();
+                    break;
+                }
+
+                int count = 0;
+                for (int j = 0; j < 5; j++)
+                {
+                    if (Guess[i].Equals(SecretWord[j]))
+                    {
+                        count++;
+                        if (count > 1)
+                        {
+                            lista[i].Background = new SolidColorBrush(Colors.Green);
+                            lista[i].Text = Guess[i] + "";
+                        }
+                        else if (i == j)
+                        {
+                            lista[i].Background = new SolidColorBrush(Colors.Green);
+                            lista[i].Text = Guess[i] + "";
+                        }
+                        else
+                        {
+                            lista[i].Background = new SolidColorBrush(Colors.Yellow);
+                            lista[i].Text = Guess[i] + "";
+                        }
+                    }
+                }
+                if (count == 0)
+                {
+                    lista[i].Background = new SolidColorBrush(Colors.Gray);
+                    lista[i].Text = Guess[i] + "";
+                }
+            }
+
+
+        }
+
+        //Metodo para volver a jugar
+        private void PlayAgain(object sender, RoutedEventArgs e)
+        {
+          
+            contador = -1;
+            for (int i = 0; i < 5; i++)
+            {
+                for (int j = 0; j < 5; j++)
+                {
+                    //Seteamos de nuevo los TextBox a blanco y vacios
+                    Lista[i][j].Background = new SolidColorBrush(Colors.White);
+                    Lista[i][j].Text = "";
+                }
+            }
+            //Asignamos las variables nuevamente.
+            cajaTexto.Text = "";
+            Random generador = new Random();
+            int numeroAleatorio = generador.Next(1, wordList.Count()-1);
+            SecretWord = wordList[numeroAleatorio];
+            debug.Content = SecretWord;
+        }
+
+        private void ShowWinMessage()
+        {
+            MessageBoxResult result = MessageBox.Show("Felicidades! Has ganado!\n ¿Quieres jugar de nuevo?", "Victoria", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
+            {
+                PlayAgain(null, null);
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void ShowLossMessage()
+        {
            
-
-            if (Guess[0].Equals(SecretWord[0])&& Guess[1].Equals(SecretWord[1]) && Guess[2].Equals(SecretWord[2]) && Guess[3].Equals(SecretWord[3])&& Guess[4].Equals(SecretWord[4]))
+            MessageBoxResult result = MessageBox.Show("Lo siento has Perdido! La palabra era: "+SecretWord+"\n ¿Quieres jugar de nuevo?", "Derrota", MessageBoxButton.YesNo, MessageBoxImage.Information);
+            if (result == MessageBoxResult.Yes)
             {
-                debug.Content = "MICHAEL";
-                Win = true;
-                System.Windows.MessageBox.Show("¡Felicidades, has ganado el juego!", "Victoria",
-                MessageBoxButton.OK, MessageBoxImage.Information);
+                PlayAgain(null, null);
             }
             else
             {
-                debug.Content = "MICHAEL ELSE";
-            }
-
-
-            //TODO: Conprobar letras
-
-            //COMPROBACION PRIMERA LETRA
-            if (Guess[0].Equals(SecretWord[0]))
-            {
-                fila1_letra1.Background = new SolidColorBrush(Colors.Green);
-                fila1_letra1.Text = Guess[0] + "";
-            }
-            else if (Guess[0].Equals(SecretWord[1]) || Guess[0].Equals(SecretWord[2]) || Guess[0].Equals(SecretWord[3]) || Guess[0].Equals(SecretWord[4]))
-            {
-                fila1_letra1.Background = new SolidColorBrush(Colors.Yellow);
-                fila1_letra1.Text = Guess[0] + "";
-
-            }
-            else
-            {
-                fila1_letra1.Background = new SolidColorBrush(Colors.Gray);
-                fila1_letra1.Text = Guess[0] + "";
-            }
-
-
-            //COMPROBACION SEGUNDA LETRA
-
-            if (Guess[1].Equals(SecretWord[1]))
-            {
-                fila1_letra2.Background = new SolidColorBrush(Colors.Green);
-                fila1_letra2.Text = Guess[1] + "";
-            }
-            else if (Guess[1].Equals(SecretWord[0]) || Guess[1].Equals(SecretWord[2]) || Guess[1].Equals(SecretWord[3]) || Guess[1].Equals(SecretWord[4]))
-            {
-                fila1_letra2.Background = new SolidColorBrush(Colors.Yellow);
-                fila1_letra2.Text = Guess[1] + "";
-
-            }
-            else
-            {
-                fila1_letra2.Background = new SolidColorBrush(Colors.Gray);
-                fila1_letra2.Text = Guess[1] + "";
-            }
-
-
-            //COMPROBACION TERCERA LETRA
-            if (Guess[2].Equals(SecretWord[2]))
-            {
-                fila1_letra3.Background = new SolidColorBrush(Colors.Green);
-                fila1_letra3.Text = Guess[2] + "";
-            }
-            else if (Guess[2].Equals(SecretWord[0]) || Guess[2].Equals(SecretWord[1]) || Guess[2].Equals(SecretWord[3]) || Guess[2].Equals(SecretWord[4]))
-            {
-                fila1_letra3.Background = new SolidColorBrush(Colors.Yellow);
-                fila1_letra3.Text = Guess[2] + "";
-
-            }
-            else
-            {
-                fila1_letra3.Background = new SolidColorBrush(Colors.Gray);
-                fila1_letra3.Text = Guess[2] + "";
-            }
-
-
-            //COMPROBACION CUARTA LETRA
-            if (Guess[3].Equals(SecretWord[3]))
-
-            {
-              
-                fila1_letra4.Background = new SolidColorBrush(Colors.Green);
-                fila1_letra4.Text = Guess[3] + "";
-            }
-            else if (Guess[3].Equals(SecretWord[0]) || Guess[3].Equals(SecretWord[1]) || Guess[3].Equals(SecretWord[2]) || Guess[3].Equals(SecretWord[4]))
-            {
-                fila1_letra4.Background = new SolidColorBrush(Colors.Yellow);
-                fila1_letra4.Text = Guess[3] + "";
-
-            }
-            else
-            {
-                fila1_letra4.Background = new SolidColorBrush(Colors.Gray);
-                fila1_letra4.Text = Guess[3] + "";
-            }
-
-            //COMPROBACION QUINTA LETRA
-
-            if (Guess[4].Equals(SecretWord[4]))
-
-            {
-              
-                fila1_letra5.Background = new SolidColorBrush(Colors.Green);
-                fila1_letra5.Text = Guess[4] + "";
-             
-            }
-            else if (Guess[4].Equals(SecretWord[0]) || Guess[4].Equals(SecretWord[1]) || Guess[4].Equals(SecretWord[2]) || Guess[4].Equals(SecretWord[3]))
-            {
-                fila1_letra5.Background = new SolidColorBrush(Colors.Yellow);
-                fila1_letra5.Text = Guess[4] + "";
-
-              
-            }
-            else
-            {
-                fila1_letra5.Background = new SolidColorBrush(Colors.Gray);
-                fila1_letra5.Text = Guess[4] + "";
+                Application.Current.Shutdown();
             }
         }
 
@@ -649,7 +218,7 @@ namespace WpfProyecto
         {
             //Do nothing.
         }
-
-       
     }
+
+
 }
