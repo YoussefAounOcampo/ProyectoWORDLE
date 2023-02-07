@@ -62,7 +62,7 @@ namespace WpfProyecto
             SecretWord = wordList[numeroAleatorio];
             char[] SecretWordArray = SecretWord.ToCharArray();
 
-            //debug.Content = SecretWord; //DESCOMENTAR PARA VER SIEMPRE LA RESPUESTA
+            debug.Content = SecretWord; 
 
 
 
@@ -80,7 +80,7 @@ namespace WpfProyecto
                 {
                     tries += Intentos[y].ToString() + " ";
                 }
-                System.IO.File.AppendAllText(filePath, SecretWord + "{Intentos: " + tries + " : xxx FALLIDA xxx}" + Environment.NewLine);
+                System.IO.File.AppendAllText(filePath, SecretWord + "{Intentos: " + tries + " }: xxx FALLIDA xxx}" + Environment.NewLine);
                 ShowLossMessage();
                 
                
@@ -118,66 +118,53 @@ namespace WpfProyecto
             String intento = cajaTexto.Text.ToString();
             cajaTexto.Text = "";
             Intentos.Add(intento);
+
+            int count = 0;
             for (int i = 0; i < 5; i++)
             {
-                bool isWin = false;
-                for (int j = 0; j < 5; j++)
+                if (Guess[i].Equals(SecretWord[i]))
                 {
-                    if (!Guess[j].Equals(SecretWord[j]))
-                    {
-                        isWin = true;
-                    }
-                }
-
-                if (!isWin)
-                {
-                    for (int x = 0; x < 5; x++)
-                    {
-                        lista[x].Background = new SolidColorBrush(Colors.Green);
-                        lista[x].Text = Guess[x] + "";
-                    }
-                    string filePath = @"..\..\..\WpfProyecto\Words\registro.txt";
-                    string tries = "";
-                    for (int y = 0;y < Intentos.Count; y++)
-                    {
-                        tries+= Intentos[y].ToString()+" ";
-                    }
-                    System.IO.File.AppendAllText(filePath, SecretWord+"{Intentos: "+tries+" : +++ ACERTADA +++}" + Environment.NewLine);
-                    ShowWinMessage();
-                    break;
-                }
-
-                int count = 0;
-                bool found = false;
-                for (int j = 0; j < 5; j++)
-                {
-                    if (Guess[i].Equals(SecretWord[j]))
-                    {
-                        count++;
-                        if (!found)
-                        {
-                            found = true;
-                            if (i == j)
-                            {
-                                lista[i].Background = new SolidColorBrush(Colors.Green);
-                                lista[i].Text = Guess[i] + "";
-                            }
-                            else
-                            {
-                                lista[i].Background = new SolidColorBrush(Colors.Yellow);
-                                lista[i].Text = Guess[i] + "";
-                            }
-                        }
-                    }
-                }
-                if (count == 0)
-                {
-                    lista[i].Background = new SolidColorBrush(Colors.Gray);
+                    count++;
+                    lista[i].Background = new SolidColorBrush(Colors.Green);
                     lista[i].Text = Guess[i] + "";
                 }
+                else
+                {
+                    bool found = false;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (Guess[i].Equals(SecretWord[j]))
+                        {
+                            found = true;
+                            lista[i].Background = new SolidColorBrush(Colors.Yellow);
+                            lista[i].Text = Guess[i] + "";
+                            break;
+                        }
+                    }
+                    if (!found)
+                    {
+                        lista[i].Background = new SolidColorBrush(Colors.Gray);
+                        lista[i].Text = Guess[i] + "";
+                    }
+                }
+            }
 
+            if (count == 5)
+            {
+                string filePath = @"..\..\..\WpfProyecto\Words\registro.txt";
+                string tries = "";
+                for (int y = 0; y < Intentos.Count; y++)
+                {
+                    tries += Intentos[y].ToString() + " ";
+                }
+                System.IO.File.AppendAllText(filePath, SecretWord + "{Intentos: " + tries + " }: +++ ACERTADA +++}" + Environment.NewLine);
+                ShowWinMessage();
             }
         }
+
+
+        
+
 
         //Metodo para volver a jugar
         private void PlayAgain(object sender, RoutedEventArgs e)
@@ -198,7 +185,7 @@ namespace WpfProyecto
             Random generador = new Random();
             int numeroAleatorio = generador.Next(1, wordList.Count()-1);
             SecretWord = wordList[numeroAleatorio];
-            //debug.Content = SecretWord; DESCOMENTAR PARA VER SIEMPRE LA RESPUESTA
+            debug.Content = SecretWord; //DESCOMENTAR PARA VER SIEMPRE LA RESPUESTA
         }
 
         private void ShowWinMessage()
