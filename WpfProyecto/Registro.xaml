@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WpfProyecto"
         mc:Ignorable="d"
+        
         Title="Registro" Height="450" Width="800"
         WindowStartupLocation="CenterScreen">
 
@@ -22,7 +23,7 @@
                 <ColumnDefinition Width="200*"/>
             </Grid.ColumnDefinitions>
             <Rectangle Grid.Column="1" Grid.Row="1" Fill="#FF191919"></Rectangle>
-            <TextBox x:Name="Caja" HorizontalAlignment="Stretch" TextBlock.Foreground="White" TextBlock.TextAlignment="Center" TextBlock.FontSize="14" TextBlock.FontWeight="Bold" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Grid.Column="1" Grid.Row="1">
+            <TextBox x:Name="Caja" HorizontalAlignment="Stretch" TextBlock.Foreground="White" TextBlock.TextAlignment="Left" TextBlock.FontSize="14" TextBlock.FontWeight="Bold" VerticalAlignment="Stretch" TextWrapping="Wrap" AcceptsReturn="True" Grid.Column="1" Grid.Row="1">
                 <TextBox.Template>
                     <ControlTemplate>
                         <ScrollViewer x:Name="PART_ContentHost" />

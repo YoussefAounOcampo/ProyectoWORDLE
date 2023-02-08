@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:WpfProyecto"
         mc:Ignorable="d"
         Title="Inicio" Height="450" Width="800"
+        
         WindowStartupLocation="CenterScreen">
 
     <Grid>
