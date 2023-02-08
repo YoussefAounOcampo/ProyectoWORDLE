@@ -29,7 +29,7 @@
                     </ControlTemplate>
                 </TextBox.Template>
             </TextBox>
-            <Button x:Name="Volver" Background="#32a852" Content="VOLVER" FontWeight="Bold" FontSize="18" Foreground="White" Height="45"  Width="200"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="2" Click="Button_Click_2">
+            <Button x:Name="Volver" BorderThickness="3" Background="#32a852" Content="VOLVER" FontWeight="Bold" FontSize="18" Foreground="White" Height="45"  Width="200"  HorizontalAlignment="Right" VerticalAlignment="Bottom" Grid.Row="2" Grid.Column="2" Click="Button_Click_2">
                 <Button.Resources>
                     <Style TargetType="{x:Type Border}">
 
