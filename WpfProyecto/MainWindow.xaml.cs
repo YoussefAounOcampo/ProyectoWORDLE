@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 namespace WpfProyecto
 {
     /// <summary>
-    /// Lógica de interacción para MainWindow.xaml
+    /// Wordle Clone Youssef Aoun Ocampo
     /// </summary>
     public partial class MainWindow : Window
     {
@@ -59,7 +59,7 @@ namespace WpfProyecto
 
             Random generador = new Random();
             int numeroAleatorio = generador.Next(1, 6);
-            SecretWord = "PIZZA"
+            SecretWord = "PIZZA";
             char[] SecretWordArray = SecretWord.ToCharArray();
 
             debug.Content = SecretWord;
@@ -68,7 +68,12 @@ namespace WpfProyecto
 
         }
 
-
+        /// <summary>
+        /// Este metodo se encarga de enviar el string introducido en la caja de texto.
+        /// Cada vez que se llame se consume un intento. Si se te acaban pierdes.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void SendGuess(object sender, RoutedEventArgs e)
         {
 
@@ -110,7 +115,14 @@ namespace WpfProyecto
 
 
         }
-
+        /// <summary>
+        /// Se va comprobando por cada List de TextBox cada letra, si coincide en la misma posición se pone en verde
+        /// Si coincide pero en otra posicion se pone en amarillo siempre que no se haya excedido los amarillos posibles
+        /// dictados por el numero de veces que se repite dicha letra, en caso contrario se pone de color gris
+        /// Por ultimo si no coincide la letra con ninguna de la palabra secreta se pone en gris.
+        /// Si se adivina la palabra se gana el juego.
+        /// </summary>
+        /// <param name="NumRow"></param>
         private void CheckRow(int NumRow)
         {
             List<TextBox> lista = Lista[NumRow];
@@ -121,50 +133,59 @@ namespace WpfProyecto
             int count = 0;
             for (int i = 0; i < 5; i++)
             {
-                count = 0;
-                int countRepes = 0;
-                int contadorVerde = 0;
+                // Verifica si la letra en la posición `i` de la palabra adivinada (`Guess`)
+                // es igual a la letra en la misma posición de la palabra secreta (`SecretWord`)
                 if (Guess[i].Equals(SecretWord[i]))
                 {
+
+                    // Si son iguales, aumenta el contador
                     count++;
+
+                    // Cambia el color del fondo y el texto de la caja de texto correspondiente
+                    // a verde para indicar una coincidencia exacta
                     lista[i].Background = new SolidColorBrush(Colors.Green);
                     lista[i].Text = Guess[i] + "";
-                    countRepes++;
-                    contadorVerde++;
                 }
                 else
                 {
-                    bool found = false;
+                    // Si no son iguales, se verifica si la letra adivinada está en la palabra secreta
+
+                    int countInSecretWord = 0;
                     for (int j = 0; j < 5; j++)
                     {
-                        countRepes = 0;
-                         contadorVerde = 0;
-                        if (Guess[i].Equals(SecretWord[j])) 
+                        if (Guess[i].Equals(SecretWord[j]))
                         {
-                            countRepes++;
-                            if (countRepes<=contadorVerde)
-                            {
-                                found = true;
-                                lista[i].Background = new SolidColorBrush(Colors.Yellow);
-                                lista[i].Text = Guess[i] + "";
-                                break;
-                            }
-                            else
-                            {
-                                lista[i].Background = new SolidColorBrush(Colors.Gray);
-                                lista[i].Text = Guess[i] + "";
-                            }
-                           
+                            countInSecretWord++;
                         }
                     }
-                    if (!found)
+
+                    // También se verifica cuántas veces aparece la letra adivinada en la palabra adivinada
+
+                    int countInGuess = 0;
+                    for (int j = 0; j < 5; j++)
+                    {
+                        if (Guess[j].Equals(Guess[i]))
+                        {
+                            countInGuess++;
+                        }
+                    }
+                    // Si la letra adivinada aparece más veces en la palabra adivinada que en la palabra secreta,
+                    // cambia el color del fondo y el texto de la caja de texto correspondiente a gris
+                    // para indicar una falta de coincidencia
+                    if (countInGuess <= countInSecretWord)
+                    {
+                        lista[i].Background = new SolidColorBrush(Colors.Yellow);
+                        lista[i].Text = Guess[i] + "";
+                    }
+                    else
                     {
                         lista[i].Background = new SolidColorBrush(Colors.Gray);
                         lista[i].Text = Guess[i] + "";
                     }
                 }
             }
-
+            // Si el contador de coincidencias es igual a 5, es decir, la palabra adivinada es igual a la palabra secreta,
+            // guarda los intentos en un archivo de texto y muestra un mensaje de victoria
             if (count == 5)
             {
                 string filePath = @"..\..\..\WpfProyecto\Words\registro.txt";
@@ -178,25 +199,14 @@ namespace WpfProyecto
             }
         }
 
+
+
+
         /// <summary>
-        /// Metodo que mira cuantas de Guess[i] hay en secretword, en el caso de solo haber una 
+        /// Metodo para volver a jugar.
         /// </summary>
-        /// <param name="Guess"></param>
-        /// <param name="SecretWord"></param>
-        /// <param name="i"></param>
-        /// <returns></returns>
-        private bool SePuedePitarDeAmarillo(string Guess, string SecretWord, int i, int row)
-        {
-
-            //Si la encuentro contare en secretword cuantas de dicha letra hay y cuantas hay verde
-            //En caso de que haya mas letras en la palabra que letras pintadas de amarillo en la
-            //fila actual + pintadas verdes pintare amarillo
-            
-                return true;
-
-        }
-       
-        //Metodo para volver a jugar
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void PlayAgain(object sender, RoutedEventArgs e)
         {
 
@@ -218,6 +228,9 @@ namespace WpfProyecto
             debug.Content = SecretWord; //DESCOMENTAR PARA VER SIEMPRE LA RESPUESTA
         }
 
+        /// <summary>
+        /// Metodo para enseñar el mensaje de victoria
+        /// </summary>
         private void ShowWinMessage()
         {
             MessageBoxResult result = MessageBox.Show("Felicidades! Has ganado!\n ¿Quieres jugar de nuevo?", "Victoria", MessageBoxButton.YesNo, MessageBoxImage.Information);
@@ -231,6 +244,9 @@ namespace WpfProyecto
             }
         }
 
+        /// <summary>
+        /// Metodo para enseñar el mensaje de derrota.
+        /// </summary>
         private void ShowLossMessage()
         {
 
@@ -250,7 +266,11 @@ namespace WpfProyecto
             //Do nothing.
         }
 
-        //METODO PARA HACER QUE CUANDO DAS A ENTER DESPUES DE INTRODUCIR LA PALABRA LLAME AL METODO SEND GUESS.
+        /// <summary>
+        /// Metodo que permite llamar al metodo sendGuess al apretar la tecla Enter.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cajaTexto_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
