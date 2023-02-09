@@ -25,11 +25,11 @@ namespace WpfProyecto
         private static int contador; //Contador que nos servirá para saber en que intento estamos.
         private List<List<TextBox>> Lista = new List<List<TextBox>>();
         private List<String> wordList = new List<String>();
-        private List<string>Intentos= new List<string>();
+        private List<string> Intentos = new List<string>();
         public MainWindow()
 
         {
-           
+
             contador = -1;
             InitializeComponent();
             boton.Content = "Prueba";
@@ -46,7 +46,7 @@ namespace WpfProyecto
             Lista.Add(cuarta);
             Lista.Add(quinta);
 
-           
+
             using (StreamReader reader = new StreamReader(@"..\..\..\WpfProyecto\Words\palabras.txt"))
             {
                 String text = reader.ReadToEnd();
@@ -56,13 +56,13 @@ namespace WpfProyecto
                     wordList.Add(word);
                 }
             }
-            
+
             Random generador = new Random();
             int numeroAleatorio = generador.Next(1, 6);
-            SecretWord = wordList[numeroAleatorio];
+            SecretWord = "PIZZA"
             char[] SecretWordArray = SecretWord.ToCharArray();
 
-            debug.Content = SecretWord; 
+            debug.Content = SecretWord;
 
 
 
@@ -82,9 +82,9 @@ namespace WpfProyecto
                 }
                 System.IO.File.AppendAllText(filePath, SecretWord + "{Intentos: " + tries + " }: xxx FALLIDA xxx}" + Environment.NewLine);
                 ShowLossMessage();
-                
-               
-               
+
+
+
             }
             else
             {
@@ -100,9 +100,9 @@ namespace WpfProyecto
                 }
                 else
                 {
-                    
+
                     contador--;
-                  
+
                 }
             }
 
@@ -118,27 +118,43 @@ namespace WpfProyecto
             String intento = cajaTexto.Text.ToString();
             cajaTexto.Text = "";
             Intentos.Add(intento);
-
             int count = 0;
             for (int i = 0; i < 5; i++)
             {
+                count = 0;
+                int countRepes = 0;
+                int contadorVerde = 0;
                 if (Guess[i].Equals(SecretWord[i]))
                 {
                     count++;
                     lista[i].Background = new SolidColorBrush(Colors.Green);
                     lista[i].Text = Guess[i] + "";
+                    countRepes++;
+                    contadorVerde++;
                 }
                 else
                 {
                     bool found = false;
                     for (int j = 0; j < 5; j++)
                     {
-                        if (Guess[i].Equals(SecretWord[j]))
+                        countRepes = 0;
+                         contadorVerde = 0;
+                        if (Guess[i].Equals(SecretWord[j])) 
                         {
-                            found = true;
-                            lista[i].Background = new SolidColorBrush(Colors.Yellow);
-                            lista[i].Text = Guess[i] + "";
-                            break;
+                            countRepes++;
+                            if (countRepes<=contadorVerde)
+                            {
+                                found = true;
+                                lista[i].Background = new SolidColorBrush(Colors.Yellow);
+                                lista[i].Text = Guess[i] + "";
+                                break;
+                            }
+                            else
+                            {
+                                lista[i].Background = new SolidColorBrush(Colors.Gray);
+                                lista[i].Text = Guess[i] + "";
+                            }
+                           
                         }
                     }
                     if (!found)
@@ -162,14 +178,28 @@ namespace WpfProyecto
             }
         }
 
+        /// <summary>
+        /// Metodo que mira cuantas de Guess[i] hay en secretword, en el caso de solo haber una 
+        /// </summary>
+        /// <param name="Guess"></param>
+        /// <param name="SecretWord"></param>
+        /// <param name="i"></param>
+        /// <returns></returns>
+        private bool SePuedePitarDeAmarillo(string Guess, string SecretWord, int i, int row)
+        {
 
-        
+            //Si la encuentro contare en secretword cuantas de dicha letra hay y cuantas hay verde
+            //En caso de que haya mas letras en la palabra que letras pintadas de amarillo en la
+            //fila actual + pintadas verdes pintare amarillo
+            
+                return true;
 
-
+        }
+       
         //Metodo para volver a jugar
         private void PlayAgain(object sender, RoutedEventArgs e)
         {
-          
+
             contador = -1;
             for (int i = 0; i < 5; i++)
             {
@@ -183,7 +213,7 @@ namespace WpfProyecto
             //Asignamos las variables nuevamente.
             cajaTexto.Text = "";
             Random generador = new Random();
-            int numeroAleatorio = generador.Next(1, wordList.Count()-1);
+            int numeroAleatorio = generador.Next(1, wordList.Count() - 1);
             SecretWord = wordList[numeroAleatorio];
             debug.Content = SecretWord; //DESCOMENTAR PARA VER SIEMPRE LA RESPUESTA
         }
@@ -203,8 +233,8 @@ namespace WpfProyecto
 
         private void ShowLossMessage()
         {
-           
-            MessageBoxResult result = MessageBox.Show("Lo siento has Perdido! La palabra era: "+SecretWord+"\n ¿Quieres jugar de nuevo?", "Derrota", MessageBoxButton.YesNo, MessageBoxImage.Information);
+
+            MessageBoxResult result = MessageBox.Show("Lo siento has Perdido! La palabra era: " + SecretWord + "\n ¿Quieres jugar de nuevo?", "Derrota", MessageBoxButton.YesNo, MessageBoxImage.Information);
             if (result == MessageBoxResult.Yes)
             {
                 PlayAgain(null, null);
@@ -223,9 +253,9 @@ namespace WpfProyecto
         //METODO PARA HACER QUE CUANDO DAS A ENTER DESPUES DE INTRODUCIR LA PALABRA LLAME AL METODO SEND GUESS.
         private void cajaTexto_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key==Key.Enter)
+            if (e.Key == Key.Enter)
             {
-                SendGuess(sender,e);
+                SendGuess(sender, e);
             }
         }
     }
