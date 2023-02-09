@@ -377,18 +377,43 @@
                 </Style>
             </TextBox.Resources>
         </TextBox>
-        <Button x:Name="boton" Click="SendGuess" Content="Prueba" TextBlock.Foreground="White" Background="#32a852" HorizontalContentAlignment="Center" Width="200" Height="50" Grid.Column="2" Grid.Row="2" >
+        <Button x:Name="boton" Click="SendGuess" Content="Prueba" TextBlock.Foreground="White" HorizontalContentAlignment="Center" Width="200" Height="50" Grid.Column="2" Grid.Row="2" >
             <Button.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
                 </Style>
             </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF3EB82E" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
             <Button.FontSize>
                 <System:Double>21</System:Double>
             </Button.FontSize>
 
 
         </Button>
+        <Button x:Name="boton1" Click="pista" Content="¿Pista?" TextBlock.Foreground="White" HorizontalContentAlignment="Center" VerticalAlignment="Center" Width="200" Height="50" Grid.Column="0" Grid.Row="1" >
+            <Button.Resources>
+                <Style TargetType="{x:Type Border}">
+                    <Setter Property="CornerRadius" Value="10"/>
+                </Style>
+            </Button.Resources>
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,0" StartPoint="0.5,1">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="#FF3EB82E" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.FontSize>
+                <System:Double>21</System:Double>
+            </Button.FontSize>
+
+
+        </Button>
+
 
     </Grid>
 </Window>

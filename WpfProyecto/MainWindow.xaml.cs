@@ -21,6 +21,7 @@ namespace WpfProyecto
     /// </summary>
     public partial class MainWindow : Window
     {
+        private int contadorPista = 0;
         private String SecretWord = "";
         private static int contador; //Contador que nos servirá para saber en que intento estamos.
         private List<List<TextBox>> Lista = new List<List<TextBox>>();
@@ -58,11 +59,9 @@ namespace WpfProyecto
             }
 
             Random generador = new Random();
-            int numeroAleatorio = generador.Next(1, 6);
-            SecretWord = "PIZZA";
+            int numeroAleatorio = generador.Next(1, wordList.Count() - 1);
+            SecretWord =wordList[numeroAleatorio];
             char[] SecretWordArray = SecretWord.ToCharArray();
-
-            debug.Content = SecretWord;
 
 
 
@@ -105,7 +104,8 @@ namespace WpfProyecto
                 }
                 else
                 {
-
+                    MessageBox.Show("Debes introducir una palabra de 5 letras", "Advertencia", MessageBoxButton.OK, MessageBoxImage.Warning);
+                    cajaTexto.Text = "";
                     contador--;
 
                 }
@@ -225,7 +225,7 @@ namespace WpfProyecto
             Random generador = new Random();
             int numeroAleatorio = generador.Next(1, wordList.Count() - 1);
             SecretWord = wordList[numeroAleatorio];
-            debug.Content = SecretWord; //DESCOMENTAR PARA VER SIEMPRE LA RESPUESTA
+            
         }
 
         /// <summary>
@@ -276,6 +276,32 @@ namespace WpfProyecto
             if (e.Key == Key.Enter)
             {
                 SendGuess(sender, e);
+            }
+        }
+
+        private void pista(object sender, RoutedEventArgs e)
+        {
+            contadorPista++;
+
+            if (contadorPista == 5)
+            {
+                debug.Content = SecretWord[0] + " █ █ █ █";
+            }
+            if (contadorPista==15)
+            {
+                debug.Content = SecretWord[0]+ " █ █ " + SecretWord[2] + " █";
+            }
+            if (contadorPista == 25)
+            {
+                debug.Content = SecretWord[0] +" "+ SecretWord[1]+ " █ " + SecretWord[3] + " █";
+            }
+            if (contadorPista == 30)
+            {
+                debug.Content = SecretWord[0] + " " + SecretWord[1] + " █ " + SecretWord[3] + " "+SecretWord[4];
+            }
+            if (contadorPista == 45)
+            {
+                debug.Content = SecretWord;
             }
         }
     }
