@@ -58,8 +58,8 @@ namespace WpfProyecto
             }
 
             Random generador = new Random();
-            int numeroAleatorio = generador.Next(1, 6);
-            SecretWord = "PIZZA";
+            int numeroAleatorio = generador.Next(1, wordList.Count() - 1);
+            SecretWord = wordList[numeroAleatorio];
             char[] SecretWordArray = SecretWord.ToCharArray();
 
             debug.Content = SecretWord;
