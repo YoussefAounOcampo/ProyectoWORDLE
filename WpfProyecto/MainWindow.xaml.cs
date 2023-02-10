@@ -279,27 +279,32 @@ namespace WpfProyecto
             }
         }
 
+        /// <summary>
+        /// Metodo que pulsando a el boton pista X veces te va ayudando. Ojo, no sabes cuantas veces tienes que darle jiji
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void pista(object sender, RoutedEventArgs e)
         {
             contadorPista++;
 
-            if (contadorPista == 5)
+            if (contadorPista == 15)
             {
                 debug.Content = SecretWord[0] + " █ █ █ █";
             }
-            if (contadorPista==15)
+            if (contadorPista==25)
             {
                 debug.Content = SecretWord[0]+ " █ █ " + SecretWord[2] + " █";
             }
-            if (contadorPista == 25)
+            if (contadorPista == 35)
             {
                 debug.Content = SecretWord[0] +" "+ SecretWord[1]+ " █ " + SecretWord[3] + " █";
             }
-            if (contadorPista == 30)
+            if (contadorPista == 50)
             {
                 debug.Content = SecretWord[0] + " " + SecretWord[1] + " █ " + SecretWord[3] + " "+SecretWord[4];
             }
-            if (contadorPista == 45)
+            if (contadorPista == 65)
             {
                 debug.Content = SecretWord;
             }
