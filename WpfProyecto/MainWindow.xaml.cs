@@ -225,6 +225,8 @@ namespace WpfProyecto
             Random generador = new Random();
             int numeroAleatorio = generador.Next(1, wordList.Count() - 1);
             SecretWord = wordList[numeroAleatorio];
+            debug.Content = "Introduce tu intento";
+            contadorPista = 0;
             
         }
 
