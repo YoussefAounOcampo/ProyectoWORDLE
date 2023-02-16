@@ -76,7 +76,7 @@ namespace WpfProyecto
         private void SendGuess(object sender, RoutedEventArgs e)
         {
 
-            if (contador == 3)
+            if (contador == 4)
             {
                 string filePath = @"..\..\..\WpfProyecto\Words\registro.txt";
                 string tries = "";
