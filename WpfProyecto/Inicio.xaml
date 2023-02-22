@@ -22,29 +22,34 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
+            <StackPanel  Grid.Column="1" Grid.Row="1" >
+                <Button Background="#32a852" Content="INSTRUCCIONES" Margin="1px"  FontWeight="Bold" FontSize="20"  Foreground="White"    Click="Button_Click_2">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button  Background="#32a852" Content="JUGAR" Foreground="White" Margin="1px"  FontWeight="Bold" FontSize="20"   Click="Button_Click_1">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
+                <Button Background="#32a852" Content="REGISTROS ANTERIORES" Margin="1px"  FontWeight="Bold" FontSize="20"  Foreground="White"   Click="Button_Click_3">
+                    <Button.Resources>
+                        <Style TargetType="{x:Type Border}">
+                            <Setter Property="CornerRadius" Value="10"/>
+                        </Style>
+                    </Button.Resources>
+                </Button>
 
-            <Button Background="#32a852" Content="INSTRUCCIONES" FontWeight="Bold" FontSize="18" Foreground="White" Height="45"  HorizontalAlignment="Stretch" VerticalAlignment="Top" Grid.Row="1" Grid.Column="1" Click="Button_Click_2">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button  Background="#32a852" Content="JUGAR" Foreground="White"  FontWeight="Bold" FontSize="18"  Height="45" HorizontalAlignment="Stretch" VerticalAlignment="Center" Grid.Row="1" Grid.Column="1" Click="Button_Click_1">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
-            <Button Background="#32a852" Content="REGISTROS ANTERIORES"  FontWeight="Bold" FontSize="18"  Foreground="White" Height="45"  HorizontalAlignment="Stretch" VerticalAlignment="Bottom" Grid.Row="1" Grid.Column="1" Click="Button_Click_3">
-                <Button.Resources>
-                    <Style TargetType="{x:Type Border}">
-                        <Setter Property="CornerRadius" Value="10"/>
-                    </Style>
-                </Button.Resources>
-            </Button>
+            </StackPanel>
+          
+            
         </Grid>
+       
     </Grid>
 </Window>
 

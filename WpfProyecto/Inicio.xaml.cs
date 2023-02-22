@@ -51,5 +51,12 @@ namespace WpfProyecto
             this.Close();
             register.Show();
         }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            Registro register = new Registro();
+            this.Close();
+            register.Show();
+        }
     }
 }
