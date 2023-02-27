@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -34,6 +35,13 @@ namespace WpfProyecto
             contador = -1;
             InitializeComponent();
             boton.Content = "Prueba";
+
+            // Obtén el valor de la configuración de BackgroundColor
+            string backgroundColor = ConfigurationManager.AppSettings["BackgroundColor"];
+
+            // Establece el color de fondo de la ventana
+            // Establece el color de fondo del Grid
+            FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
 
             List<TextBox> primera = new List<TextBox> { fila1_letra1, fila1_letra2, fila1_letra3, fila1_letra4, fila1_letra5 };
             List<TextBox> segunda = new List<TextBox> { fila2_letra1, fila2_letra2, fila2_letra3, fila2_letra4, fila2_letra5 };
@@ -311,7 +319,37 @@ namespace WpfProyecto
                 debug.Content = SecretWord;
             }
         }
-    }
 
+        private void Configuracion_Checked(object sender, RoutedEventArgs e)
+        {
+            // Obtén el valor actual de la configuración de BackgroundColor
+            string backgroundColor = ConfigurationManager.AppSettings["BackgroundColor"];
+
+            // Si el color de fondo actual es blanco, establece el color de fondo en azul
+            if (backgroundColor == "White")
+            {
+                ConfigurationManager.AppSettings["BackgroundColor"] = "#FF191919";
+                wordle.Background = new SolidColorBrush(Colors.White);
+                wordle.Foreground = new SolidColorBrush(Colors.Black);
+                debug.Foreground= new SolidColorBrush(Colors.Black);
+
+            }
+            else
+            {
+                // De lo contrario, establece el color de fondo en blanco
+                ConfigurationManager.AppSettings["BackgroundColor"] = "White";
+               
+                wordle.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF191919"));
+                wordle.Foreground = new SolidColorBrush(Colors.White); 
+                debug.Foreground = new SolidColorBrush(Colors.White);
+            }
+
+            // Actualiza el color de fondo de la ventana o del Grid
+            this.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+            FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+        }
+    }
+    
+  
 
 }

@@ -22,6 +22,8 @@ namespace WpfProyecto
         public Inicio()
         {
 
+
+
             InitializeComponent();
         }
 
