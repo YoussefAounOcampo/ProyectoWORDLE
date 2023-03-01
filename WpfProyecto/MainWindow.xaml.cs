@@ -304,15 +304,15 @@ namespace WpfProyecto
             }
             if (contadorPista==25)
             {
-                debug.Content = SecretWord[0]+ " █ █ " + SecretWord[2] + " █";
+                debug.Content = SecretWord[0]+ " █ █ " + SecretWord[3] + " █";
             }
             if (contadorPista == 35)
             {
-                debug.Content = SecretWord[0] +" "+ SecretWord[1]+ " █ " + SecretWord[2] + " █";
+                debug.Content = SecretWord[0] +" "+ SecretWord[1]+ " █ " + SecretWord[3] + " █";
             }
             if (contadorPista == 50)
             {
-                debug.Content = SecretWord[0] + " " + SecretWord[1] + " █ " + SecretWord[2] + " "+SecretWord[3];
+                debug.Content = SecretWord[0] + " " + SecretWord[1] + " █ " + SecretWord[3] + " "+SecretWord[4];
             }
             if (contadorPista == 65)
             {
