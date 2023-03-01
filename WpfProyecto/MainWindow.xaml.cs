@@ -322,12 +322,14 @@ namespace WpfProyecto
 
         private void Configuracion_Checked(object sender, RoutedEventArgs e)
         {
+            
             // Obtén el valor actual de la configuración de BackgroundColor
             string backgroundColor = ConfigurationManager.AppSettings["BackgroundColor"];
 
-            // Si el color de fondo actual es blanco, establece el color de fondo en azul
+            // Si el color de fondo actual es blanco, establece el color de fondo en negro
             if (backgroundColor == "White")
             {
+                Configuracion.Content = "Modo noche";
                 ConfigurationManager.AppSettings["BackgroundColor"] = "#FF191919";
                 wordle.Background = new SolidColorBrush(Colors.White);
                 wordle.Foreground = new SolidColorBrush(Colors.Black);
@@ -336,6 +338,8 @@ namespace WpfProyecto
             }
             else
             {
+                Configuracion.Content = "Modo día";
+
                 // De lo contrario, establece el color de fondo en blanco
                 ConfigurationManager.AppSettings["BackgroundColor"] = "White";
                
