@@ -322,36 +322,56 @@ namespace WpfProyecto
 
         private void Configuracion_Checked(object sender, RoutedEventArgs e)
         {
-            
+
+
+            // Obtén el valor actual de la configuración de BackgroundColor
+            string backgroundColor = ConfigurationManager.AppSettings["BackgroundColor"];
+
+            // Si el color de fondo actual es blanco, establece el color de fondo en negro
+            if (backgroundColor == "#FF191919")
+            {
+                Configuracion.Content = "Modo Noche";
+                ConfigurationManager.AppSettings["BackgroundColor"] = "White";
+                Color customColor = (Color)ColorConverter.ConvertFromString("#FF191919");
+                wordle.Background = new SolidColorBrush(customColor);
+                wordle.Foreground = new SolidColorBrush(Colors.White);
+                debug.Foreground = new SolidColorBrush(Colors.White);
+
+                // Actualiza el color de fondo de la ventana o del Grid
+                this.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+                FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+
+            }
+
+
+
+        }
+
+        private void Configuracion_UnChecked(object sender, RoutedEventArgs e)
+        {
+
             // Obtén el valor actual de la configuración de BackgroundColor
             string backgroundColor = ConfigurationManager.AppSettings["BackgroundColor"];
 
             // Si el color de fondo actual es blanco, establece el color de fondo en negro
             if (backgroundColor == "White")
             {
-                Configuracion.Content = "Modo noche";
+                Configuracion.Content = "Modo Día";
                 ConfigurationManager.AppSettings["BackgroundColor"] = "#FF191919";
                 wordle.Background = new SolidColorBrush(Colors.White);
+                Color customColor = (Color)ColorConverter.ConvertFromString("#FF191919");
                 wordle.Foreground = new SolidColorBrush(Colors.Black);
-                debug.Foreground= new SolidColorBrush(Colors.Black);
+                debug.Foreground = new SolidColorBrush(Colors.Black);
+                // Actualiza el color de fondo de la ventana o del Grid
+                this.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+                FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
 
             }
-            else
-            {
-                Configuracion.Content = "Modo día";
 
-                // De lo contrario, establece el color de fondo en blanco
-                ConfigurationManager.AppSettings["BackgroundColor"] = "White";
-               
-                wordle.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom("#FF191919"));
-                wordle.Foreground = new SolidColorBrush(Colors.White); 
-                debug.Foreground = new SolidColorBrush(Colors.White);
-            }
 
-            // Actualiza el color de fondo de la ventana o del Grid
-            this.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
-            FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
         }
+
+     
     }
     
   

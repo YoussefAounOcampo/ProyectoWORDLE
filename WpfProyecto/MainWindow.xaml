@@ -413,7 +413,7 @@
 
 
         </Button>
-        <ToggleButton x:Name="Configuracion" Grid.Column="2" Content="Modo día" Click="Configuracion_Checked" HorizontalAlignment="Center" Width="150" Height="50" VerticalAlignment="Center">
+        <ToggleButton x:Name="Configuracion" Grid.Column="2" Content="Modo Noche" HorizontalAlignment="Center" Width="150" Height="50" VerticalAlignment="Center" Unchecked="Configuracion_UnChecked" Checked="Configuracion_Checked">
             <ToggleButton.Resources>
                 <Style TargetType="{x:Type Border}">
                     <Setter Property="CornerRadius" Value="10"/>
