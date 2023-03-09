@@ -336,10 +336,14 @@ namespace WpfProyecto
                 wordle.Background = new SolidColorBrush(customColor);
                 wordle.Foreground = new SolidColorBrush(Colors.White);
                 debug.Foreground = new SolidColorBrush(Colors.White);
-
+                String color = "#FF191919";
                 // Actualiza el color de fondo de la ventana o del Grid
                 this.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
                 FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["BackgroundColor"].Value = color;
+                config.Save();
 
             }
 
@@ -362,9 +366,13 @@ namespace WpfProyecto
                 Color customColor = (Color)ColorConverter.ConvertFromString("#FF191919");
                 wordle.Foreground = new SolidColorBrush(Colors.Black);
                 debug.Foreground = new SolidColorBrush(Colors.Black);
+                String color = "White";
                 // Actualiza el color de fondo de la ventana o del Grid
                 this.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
                 FONDO.Background = (SolidColorBrush)(new BrushConverter().ConvertFrom(backgroundColor));
+                Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                config.AppSettings.Settings["BackgroundColor"].Value = color;
+                config.Save();
 
             }
 
